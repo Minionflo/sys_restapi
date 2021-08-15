@@ -1,0 +1,4 @@
+node_modules
+.dockerignore
+build.sh
+package-lock.json
