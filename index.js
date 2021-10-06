@@ -26,16 +26,15 @@ app.get("/uptime", (req, res) => {
     console.log("/uptime Req: " + result)
     res.end(result.toString());
 })
-function sec2time(timeInSeconds) {
-    var pad = function(num, size) { return ('000' + num).slice(size * -1); },
-    time = parseFloat(timeInSeconds).toFixed(3),
-    days = Math.floor(time / 60 / 60 / 24),
-    hours = Math.floor(time / 60 / 60),
-    minutes = Math.floor(time / 60) % 60,
-    seconds = Math.floor(time - minutes * 60)
-    return pad(days, 3) + ':' + pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
-}
-
+function sec2time(seconds) {
+    seconds = Number(seconds);
+    var pad = function(num, size) { return ('000' + num).slice(size * -1); }
+    var d = Math.floor(seconds / (3600*24));
+    var h = Math.floor(seconds % (3600*24) / 3600);
+    var m = Math.floor(seconds % 3600 / 60);
+    var s = Math.floor(seconds % 60);
+    return pad(d, 3) + ':' + pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2);
+    }
 
 app.get("/mem/free", (req, res) => {
     res.status(200)
