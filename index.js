@@ -1,16 +1,15 @@
 const fs = require('fs');
 const app = require('express')();
 
-var zone = process.env.ZONE
+var cpu_temp_path = process.env.CPU_TEMP_PATH
 var port = process.env.PORT
 if (port >= 0 && port <= 65536) { console.log("port vaild") } else {port = 8080; console.log("port invalid. set port to 8080")}
-if (Number.isFinite(zone)) { console.log("zone vaild") } else {zone = 0; console.log("zone invalid. set zone to 0")}
 
 app.listen(port, () => console.log("Started"))
 
 app.get("/cpu/temp", (req, res) => {
     res.status(200)
-    var result_raw = fs.readFileSync("/sys/class/thermal/thermal_zone" + zone + "/temp")
+    var result_raw = fs.readFileSync(cpu_temp_path)
     var result = result_raw*0.001
     console.log("/cpu/temp Req: " + result)
     res.end(result.toString());
