@@ -25,6 +25,13 @@ app.get("/cpu/freq", (req, res) => {
     res.end(result.toString());
 })
 
+app.get("/cpu/model", (req, res) => {
+    res.status(200)
+    var result = os.cpus()[0].model
+    console.log("/cpu/model Req: " + result)
+    res.end(result.toString());
+})
+
 app.get("/uptime", (req, res) => {
     res.status(200)
     var result_raw0 = fs.readFileSync("/proc/uptime")
