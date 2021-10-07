@@ -47,3 +47,15 @@ app.get("/mem/free", (req, res) => {
     console.log("/mem/free Req: " + result)
     res.end(result.toString());
 })
+
+app.get("/mem/available", (req, res) => {
+    res.status(200)
+    var result_raw0 = fs.readFileSync("/proc/meminfo")
+    var result_raw1 = result_raw0.toString()
+    var result_raw2 = result_raw1.split('\n')
+    var result_raw3 = result_raw2[2].replace(/\D/g, "")
+    var result_raw4 = result_raw3/1024
+    var result = result_raw4.toFixed(0)
+    console.log("/mem/available Req: " + result)
+    res.end(result.toString());
+})
