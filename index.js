@@ -16,6 +16,14 @@ app.get("/cpu/temp", (req, res) => {
     res.end(result.toString());
 })
 
+app.get("/cpu/freq", (req, res) => {
+    res.status(200)
+    var result = []
+    os.cpus().forEach(function(info) {result.push(info.speed)})
+    result = result.join(":").toString()
+    console.log("/cpu/freq Req: " + result)
+    res.end(result.toString());
+})
 
 app.get("/uptime", (req, res) => {
     res.status(200)
