@@ -1,5 +1,6 @@
-const fs = require('fs');
+const fs  = require('fs');
 const app = require('express')();
+const os  = require('os');
 
 var cpu_temp_path = process.env.CPU_TEMP_PATH
 var port = process.env.PORT
